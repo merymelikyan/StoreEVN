@@ -5,8 +5,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %} {% endblock %}</title>
+  <title>{% block title %} {% endblock title %}</title>
   
+  
+{% block slider_css %}
+{% endblock slider_css %}
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -31,7 +35,7 @@
           </svg>
         </button>
         <div 
-   
+          data-menuContainer
           class="
             flex items-center jusfity-between gap-8
             max-[768px]:flex-col
@@ -46,16 +50,36 @@
         >
           <ul class="flex gap-4 max-[768px]:flex-col max-[768px]:text-center">
             <li>
-              <a href="#" class="text-white hover:text-emerald-200 transition-color duration-300 text-xl">Home</a>
+              <a href="{% url 'main:index' %}" 
+              class="
+                hover:text-emerald-200 transition-color duration-300 text-xl
+                {% if request.get_full_path == '/' %} text-red-600 
+                {% else %} text-white {% endif %}
+              ">Home</a>
             </li>
             <li>
-              <a href="#" class="text-white hover:text-emerald-200 transition-color duration-300 text-xl">Shop</a>
+              <a href="{% url 'main:shop' %}" 
+              class="
+                hover:text-emerald-200 transition-color duration-300 text-xl
+                {% if request.get_full_path == '/shop/' %} text-red-600 
+                {% else %} text-white {% endif %}
+              ">Shop</a>
             </li>
             <li>
-              <a href="#" class="text-white hover:text-emerald-200 transition-color duration-300 text-xl">About</a>
+              <a href="{% url 'main:about' %}"
+              class="
+                hover:text-emerald-200 transition-color duration-300 text-xl
+                {% if request.get_full_path == '/about/' %} text-red-600 
+                {% else %} text-white {% endif %}
+              ">About</a>
             </li>
             <li>
-              <a href="#" class="text-white hover:text-emerald-200 transition-color duration-300 text-xl">Contact</a>
+              <a href="{% url 'main:contacts' %}" 
+              class="
+                hover:text-emerald-200 transition-color duration-300 text-xl
+                {% if request.get_full_path == '/contacts/' %} text-red-600 
+                {% else %} text-white {% endif %}
+              ">Contacts</a>
             </li>
           </ul>
         
@@ -80,7 +104,7 @@
   </nav>
 
   <header>
-    <div class="container  mx-auto px-4 py-2">
+    <div>
       {% block header %}  
       {% endblock header %}
     </div>  
@@ -89,6 +113,11 @@
   {% endblock content %}
 
   <footer></footer>
+
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block slider_js %}
+  {% endblock slider_js %}
+
 </body>
 </html>    
 
