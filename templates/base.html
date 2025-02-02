@@ -1,4 +1,4 @@
-{% comment %} {% load static %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +104,7 @@
           </ul>
         
           <div>
-            <a href="#"            
+            <a href="{% url 'users:login' %}"            
               class="
                 bg-emerald-600 
                 rounded-md px-4 
@@ -148,4 +148,4 @@
 
 
 
- {% endcomment %}
+
